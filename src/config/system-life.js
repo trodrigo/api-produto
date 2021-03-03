@@ -14,7 +14,7 @@ router.get('/read', (req, res) => {
         return res.send('Ok');
     } else {
         res.statusCode = 500;
-        return res.send('');
+        return res.send('Erro interno');
     }   
 });
 
