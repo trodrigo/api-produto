@@ -55,13 +55,14 @@ app.get('/stress/:elemento/tempostress/:tempoStress/tempofolga/:tempoFolga/ciclo
 
 app.use('/api/produto', product);
 
-var developer_db_url = 'mongodb://mongouser:mongopwd@localhost:27017/admin';
+//var developer_db_url = 'mongodb://mongouser:mongopwd@localhost:27017/admin';
+var developer_db_url = 'mongodb+srv://root:BT585fhfw7adkW3y@cluster0.qaxeh.mongodb.net/kubedev?retryWrites=true&w=majority';
 var mongoUrl = process.env.MONGODB_URI || developer_db_url;
 
 mongoose.Promise = global.Promise;
 
-var connectWithRetry = function () {
-    return mongoose.connect(mongoUrl, function (err) {
+var connectWithRetry = function () {    
+    return mongoose.connect(mongoUrl, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false }, function (err) {
         if (err) {
             console.error('Failed to connect to mongo on startup - retrying in 5 sec', err);
             setTimeout(connectWithRetry, 5000);
@@ -71,7 +72,7 @@ var connectWithRetry = function () {
 
 connectWithRetry();
 
-var port = process.env.SERVER_PORT || 8080;
+var port = process.env.SERVER_PORT || 8085;
 
 app.listen(port, () => {
     console.log('Servidor rodando na porta ' + port);
