@@ -1,0 +1,6 @@
+service:
+  type: NodePort
+  nodePort: 30002
+
+adminUser: admin
+adminPassword: "123456"

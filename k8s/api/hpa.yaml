@@ -1,0 +1,13 @@
+# Horizontal Pod Autoscaler
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: api-deployment
+spec:
+  minReplicas: 1
+  maxReplicas: 3
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: api
+  targetCPUUtilizationPercentage: 80 # Vai escalar sempre que a CPU bater em 80%  
